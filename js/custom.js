@@ -153,9 +153,9 @@ $(document).ready(function () {
                         });
                     },
                     error: function () {
-                        $('#contact').fadeTo("slow", 1, function () {
-                            $('#error').fadeIn();
-                        });
+                        // $('#contact').fadeTo("slow", 1, function () {
+                        //     $('#error').fadeIn();
+                        // });
                     }
                 });
             }
