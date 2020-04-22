@@ -114,6 +114,10 @@ body {
     color: white;
 }
 
+.table-cell>h2{
+    color: #AAA;
+}
+
 .preloader>.icon {
     position: absolute;
     top: 50%;
