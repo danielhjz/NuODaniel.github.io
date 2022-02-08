@@ -1,7 +1,7 @@
 // JavaScript Document
 var portTypes = ['all','poster', 'oilpaint', 'photography', 'food']
 $.ajax({
-    url: "http://localhost:2582/bbt/portfolio?type=0",
+    url: "https://hxjing.com/bbt/portfolio?type=0",
     type: 'GET',
     dataType: 'json',
     success: function(resp) {
