@@ -1,14 +1,66 @@
 // JavaScript Document
+var portTypes = ['all','poster', 'oilpaint', 'photography', 'food']
+$.ajax({
+    url: "https://hxjing.com/bbt/portfolio?type=0",
+    type: 'GET',
+    dataType: 'json',
+    success: function(resp) {
+        //图片数组的渲染
+        console.log("")
+        var srcHtml = '';
+        var portItemClasses = '';
+        $.each(resp.data, function(i, item) {
+            srcHtml += '<div class="col-md-4 col-sm-6 ' + portTypes[item.type] +' ">'
+                + '<a id="demo'+ i +'" href="#animatedModal" class="portfolio_item"> <img src="'+ item.url +'" alt="image" class="img-responsive" />'
+                  +  '<div class="portfolio_item_hover">'
+                  +  '    <div class="portfolio-border clearfix">'
+                  +  '      <div class="item_info"> <span>'+ item.title +'</span> <em>' + item.desc + '</em> </div>'
+                  +  '   </div>'
+                  +  '</div>'
+            +    '</a>'
+            +'</div>'
+            if (i != 0){
+                 portItemClasses += ',';
+            }
+            portItemClasses += "#port" + i;
+        });
+        $(".portfolio_container").append(srcHtml);
+         //  isotope
+        $('#projects').waitForImages(function () {
+            var $container = $('.portfolio_container');
+            $container.isotope({
+                filter: '*',
+            });
+
+            $('.portfolio_filter a').click(function () {
+                $('.portfolio_filter .active').removeClass('active');
+                $(this).addClass('active');
+
+                var selector = $(this).attr('data-filter');
+                $container.isotope({
+                    filter: selector,
+                    animationOptions: {
+                        duration: 500,
+                        animationEngine: "jquery"
+                    }
+                });
+                return false;
+            });
+
+        });
+        $(portItemClasses).animatedModal();
+    }
+})
+
 
 $(window).load(function () {
     "use strict";
     // makes sure the whole site is loaded
-    $('#status').fadeOut(); // will first fade out the loading animation
-    // $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
     $('body').delay(350).css({
         'overflow': 'visible'
     });
 })
+
 
 $(document).ready(function () {
     "use strict";
@@ -79,32 +131,10 @@ $(document).ready(function () {
         disable: 'mobile'
     });
 
-    //  isotope
-    $('#projects').waitForImages(function () {
-        var $container = $('.portfolio_container');
-        $container.isotope({
-            filter: '*',
-        });
 
-        $('.portfolio_filter a').click(function () {
-            $('.portfolio_filter .active').removeClass('active');
-            $(this).addClass('active');
-
-            var selector = $(this).attr('data-filter');
-            $container.isotope({
-                filter: selector,
-                animationOptions: {
-                    duration: 500,
-                    animationEngine: "jquery"
-                }
-            });
-            return false;
-        });
-
-    });
 
     //animatedModal
-    $("#demo01,#demo02,#demo03,#demo04,#demo05,#demo06,#demo07,#demo08,#demo09").animatedModal();
+//    $("#demo01,#demo02,#demo03,#demo04,#demo05,#demo06,#demo07,#demo08,#demo09").animatedModal();
 
     // Contact Form 	
 
