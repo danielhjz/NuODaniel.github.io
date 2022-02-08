@@ -11,12 +11,13 @@ $.ajax({
         var portItemClasses = '';
         $.each(resp.data, function(i, item) {
             srcHtml += '<div class="col-md-4 col-sm-6 ' + portTypes[item.type] +' ">'
-                + '<a id="demo'+ i +'" href="#animatedModal" class="portfolio_item"> <img src="'+ item.url +'" alt="image" class="img-responsive" />'
-                  +  '<div class="portfolio_item_hover">'
-                  +  '    <div class="portfolio-border clearfix">'
-                  +  '      <div class="item_info"> <span>'+ item.title +'</span> <em>' + item.desc + '</em> </div>'
-                  +  '   </div>'
-                  +  '</div>'
+                // + '<a id="demo'+ i +'" href="#" class="portfolio_item"> '
+                + '<img data-original="'+ item.url+ '" src="'+ item.url +'" alt="image" class="portfolio_item img-responsive" alt="'+ item.title +'"/>'
+                //   +  '<div class="portfolio_item_hover">'
+                //   +  '    <div class="portfolio-border clearfix">'
+                //   +  '      <div class="item_info"> <span>'+ item.title +'</span> <em>' + item.desc + '</em> </div>'
+                //   +  '   </div>'
+                //   +  '</div>'
             +    '</a>'
             +'</div>'
             if (i != 0){
@@ -31,7 +32,13 @@ $.ajax({
             $container.isotope({
                 filter: '*',
             });
-
+            var $images = $('.docs-pictures');
+            var options = {
+              // inline: true,
+              url: 'data-original'
+            };
+          
+            $images.viewer(options);
             $('.portfolio_filter a').click(function () {
                 $('.portfolio_filter .active').removeClass('active');
                 $(this).addClass('active');
